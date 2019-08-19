@@ -1,6 +1,6 @@
 # CDISC Library API Relay
 
-This script allows to use the CDISC Library API by keeping authentication information in a central location.
+This script allows to use CDISC Library API by keeping the authentication information in a central location.
 
 **WARNING** You must follow the CDISC Library API EULA, including the following:
 * You shall not (and will not allow or assist any third party to) access the API in order to replicate or compete with CDISC Library or CDISC Materials.
@@ -58,7 +58,7 @@ pm2 start api.js
 You can access CSV and XLS formats by adding '&format=(csv|xls|json)' at the end of the address
 
 ```
-your.domain.com:4600/api/mdr/adam/adam-occds-1-your.domain.com:4600/api/mdr/products0&format=csv
+your.domain.com:4600/api/mdr/adam/adam-occds-1-0&format=csv
 ```
 Note that only a limited number of API endpoints have CSV or XLS formats. See [CDISC Library documentation](https://wiki.cdisc.org/display/LIBSUPRT/Documentation) for details.
 
