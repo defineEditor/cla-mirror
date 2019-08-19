@@ -1,0 +1,15 @@
+{
+  "name": "claRelay",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "version": "0.0.1",
+  "description": "CDISC Library API Relay",
+  "main": "app.js",
+  "author": "Dmitry Kolosov",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1",
+    "request": "^2.88.0"
+  }
+}
