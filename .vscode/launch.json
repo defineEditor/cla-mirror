@@ -1,0 +1,27 @@
+{
+    "version": "0.1.0",
+    "configurations": [
+      {
+        "type": "node",
+        "request": "launch",
+        "name": "Launch Program",
+        "program": "${workspaceFolder}/src/app.js",
+        "args": [],
+        "runtimeArgs": [
+          "--nolazy"
+        ],
+        "env": {
+          "NODE_ENV": "development"
+        },
+        "stopOnEntry": false,
+        "preLaunchTask": null,
+        "runtimeExecutable": null,
+        "externalConsole": false,
+        "sourceMaps": false,
+        "cwd": "${workspaceRoot}",
+        "outDir": null
+      },
+
+    ]
+  }
+}

@@ -1,15 +1,28 @@
 {
-  "name": "claRelay",
+  "name": "cla-relay",
   "scripts": {
-    "start": "node app.js"
+    "start": "node src/app.js"
   },
   "version": "0.0.1",
-  "description": "CDISC Library API Relay",
-  "main": "app.js",
+  "description": "Relay for CDISC Library API ",
+  "main": "src/app.js",
   "author": "Dmitry Kolosov",
+  "contributors": [
+    {
+      "name": "Sergei Krivtcov",
+      "email": "1000eyed@gmail.com",
+      "url": ""
+    },
+    {
+      "name": "Dmitry Kolosov",
+      "email": "dmitry.m.kolosov@gmail.com",
+      "url": ""
+    }
+  ],
   "license": "MIT",
   "dependencies": {
+    "cla-wrapper": "../cla-wrapper/",
     "express": "^4.17.1",
-    "request": "^2.88.0"
+    "query-string": "^6.8.3"
   }
 }
