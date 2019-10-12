@@ -1,28 +1,34 @@
 {
-  "name": "cla-relay",
-  "scripts": {
-    "start": "node src/app.js"
-  },
-  "version": "0.0.1",
-  "description": "Relay for CDISC Library API ",
-  "main": "src/app.js",
-  "author": "Dmitry Kolosov",
-  "contributors": [
-    {
-      "name": "Sergei Krivtcov",
-      "email": "1000eyed@gmail.com",
-      "url": ""
+    "name": "cla-relay",
+    "scripts": {
+        "start": "node src/app.js"
     },
-    {
-      "name": "Dmitry Kolosov",
-      "email": "dmitry.m.kolosov@gmail.com",
-      "url": ""
+    "version": "0.1.0",
+    "description": "Relay for CDISC Library API ",
+    "repository": "https://github.com/defineEditor/cla-relay",
+    "main": "src/app.js",
+    "author": "Dmitry Kolosov",
+    "contributors": [
+        {
+            "name": "Sergei Krivtcov",
+            "email": "1000eyed@gmail.com",
+            "url": ""
+        },
+        {
+            "name": "Dmitry Kolosov",
+            "email": "dmitry.m.kolosov@gmail.com",
+            "url": ""
+        }
+    ],
+    "keywords": [
+        "cdisc",
+        "library",
+        "api"
+    ],
+    "license": "MIT",
+    "dependencies": {
+        "cla-wrapper": "^0.1.2",
+        "express": "^4.17.1",
+        "query-string": "^6.8.3"
     }
-  ],
-  "license": "MIT",
-  "dependencies": {
-    "cla-wrapper": "../cla-wrapper/",
-    "express": "^4.17.1",
-    "query-string": "^6.8.3"
-  }
 }

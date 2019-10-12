@@ -17,10 +17,10 @@ let requestInProcess = false;
 app.use('/', async (req, res) => {
     try {
         if (req.url.startsWith('/api/')) {
-            let endpoint = req.url.replace(/^\/api/, '$1');
+            let endpoint = req.url.replace(/^\/api/, '');
             let headers = {};
             if (/application\/(json|vnd\.ms-excel)|text\/csv/i.test(req.headers.accept)) {
-                headers = req.headers;
+                headers.accept = req.headers.accept;
             } else {
                 // If format parameter is provided, use it to specify the response format
                 if (/&format=csv/i.test(endpoint)) {
@@ -35,13 +35,13 @@ app.use('/', async (req, res) => {
             }
             let response = await cl.coreObject.apiRequest(endpoint, headers, true);
 
-            res.send(response);
+            res.send(response.body);
             // req.pipe(response).pipe(res);
         } else if (req.url.startsWith('/?')) {
             requestInProcess = true;
             let response = await wrapperRequest(req.url.replace(/^\//, ''), cl);
             requestInProcess = false;
-            res.send(response);
+            res.send(response.body);
         }
     } catch (error) {
         console.log(`Error when running a request for ${req.url}: ${Object.keys(error)}`);
