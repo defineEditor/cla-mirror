@@ -6,7 +6,7 @@ This script allows to use CDISC Library API by keeping the authentication inform
 * You shall not (and will not allow or assist any third party to) access the API in order to replicate or compete with CDISC Library or CDISC Materials.
 * You are solely responsible for the user(s) accessing the API using the account provided
 
-*Verify that the server at which you are running the application is available only in the intranet.*
+* Verify that the server at which you are running the application is available only in the intranet.*
 
 
 # Installation
@@ -25,9 +25,21 @@ Create file **.clarelay** in your home folder:
         "username": "CDISC Library API username",
         "password": "CDISC Library API password"
     },
-    "port": 4600
+    "port": 4600,
+    "cache": {
+        "enabled": false,
+        "includeFilter": [],
+        "excludeFilter": ["health", "mdr/products", ".*/root/.*"],
+        "cacheFolder": "/path/to/cache/folder"
+    }
 }
 ```
+
+The relay support basic caching functionality, to use it, change ***cache.enabled*** value to true.
+* cache.enabled - controls whether cache is used.
+* includeFilter - array of endpoint regexes which are cached. If none specified, all endpoints are cached, except for those specified in excludeFilter.
+* excludeFilter - array of endpoint regexes which are not cached.
+* cacheFolder - path to the folder where cached values will be stored
 
 ### Installation
 
