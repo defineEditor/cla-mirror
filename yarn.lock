@@ -85,10 +85,10 @@ caseless@~0.12.0:
   resolved "https://registry.yarnpkg.com/caseless/-/caseless-0.12.0.tgz#1b681c21ff84033c826543090689420d187151dc"
   integrity sha1-G2gcIf+EAzyCZUMJBolCDRhxUdw=
 
-cla-wrapper@^0.2.2:
-  version "0.2.2"
-  resolved "https://registry.yarnpkg.com/cla-wrapper/-/cla-wrapper-0.2.2.tgz#b989adaa98d06d6d4a79fbda9f0153ab9ae34e62"
-  integrity sha512-7vqxWhje0nDpnQnRGMntVCpVhIzPOCCxLzVLa6CMWHvQcCFrlJkaVSjFxjGq7KUXIWYi9P4RU+x6KS2tINOQOw==
+cla-wrapper@^0.2.3:
+  version "0.2.3"
+  resolved "https://registry.yarnpkg.com/cla-wrapper/-/cla-wrapper-0.2.3.tgz#26f836412a0d787c1349b9d9b372399df643d336"
+  integrity sha512-y4xec6N86gyxsfO/CO/niRH1p2+s+S0kZzFnimtXFcTUbIcCbd1OpyN3x+6HfO8CwoScvC4FXedBB1JViRs3Dg==
   dependencies:
     json2csv "^4.5.2"
     request "^2.88.0"
