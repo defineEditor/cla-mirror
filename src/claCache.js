@@ -86,13 +86,11 @@ class ClaCache {
             let endpoint = request.url.replace(/^.*?api\//, '');
             let excludeMatched = this.excludeFilter.some(regex => (RegExp('^' + regex + '$').test(endpoint)));
             if (excludeMatched) {
-                console.log(endpoint + ' filtered');
                 return true;
             }
             if (this.includeFilter.length > 0) {
                 let includeMatched = this.includeFilter.some(regex => (RegExp('^' + regex + '$').test(endpoint)));
                 if (!includeMatched) {
-                    console.log(endpoint + ' filtered');
                     return true;
                 }
             }
