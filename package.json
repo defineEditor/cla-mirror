@@ -3,7 +3,7 @@
     "scripts": {
         "start": "node src/app.js"
     },
-    "version": "0.2.0",
+    "version": "0.2.1",
     "description": "Relay for CDISC Library API ",
     "repository": "https://github.com/defineEditor/cla-relay",
     "main": "src/app.js",
