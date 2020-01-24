@@ -71,9 +71,9 @@ class ClaCache {
             .replace(/.*?\/mdr\//, '')
             .replace(/\//g, '.')
         ;
-        let requestOptions = JSON.stringify({ ...request, url: undefined });
+        let requestOptions = JSON.stringify({ ...request.headers });
         let hashHex = crypto.createHash('sha1').update(requestOptions).digest('hex');
-        if (hashHex === '31d7e57308b4e168b3b56ede916422c25269d04c') {
+        if (request && request.headers && request.headers.Accept === 'application/json') {
             // These are standard request options, no need to add a hash code
             return shortenedUrl;
         } else {
