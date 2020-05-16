@@ -45,7 +45,7 @@ The mirror support basic caching functionality, to use it, change ***cache.enabl
 
 Clone the repository:
 ```
-git clone https://github.com/defineEditor/claMirror.git
+git clone https://github.com/defineEditor/cla-mirror.git
 ```
 Navigate to the downloaded folder and install all required dependencies:
 ```
