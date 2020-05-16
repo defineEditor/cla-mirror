@@ -1,4 +1,4 @@
-# CDISC Library API Relay
+# CDISC Library API Mirror
 
 This script allows to use CDISC Library API by keeping the authentication information in a central location.
 
@@ -18,7 +18,7 @@ The following software is needed to compile the application:
 * Yarn
 
 ### Configuration
-Create file **.clarelay** in your home folder:
+Create file **.clamirror** in your home folder:
 ```
 {
     "auth": {
@@ -29,23 +29,23 @@ Create file **.clarelay** in your home folder:
     "cache": {
         "enabled": false,
         "includeFilter": [],
-        "excludeFilter": ["health", "mdr/products", ".*/root/.*"],
+        "excludeFilter": ["health", "mdr/lastupdated", "mdr/products", ".*/root/.*"],
         "cacheFolder": "/path/to/cache/folder"
     }
 }
 ```
 
-The relay support basic caching functionality, to use it, change ***cache.enabled*** value to true.
+The mirror support basic caching functionality, to use it, change ***cache.enabled*** value to true.
 * cache.enabled - controls whether cache is used.
 * includeFilter - array of endpoint regexes which are cached. If none specified, all endpoints are cached, except for those specified in excludeFilter.
-* excludeFilter - array of endpoint regexes which are not cached.
-* cacheFolder - path to the folder where cached values will be stored
+* excludeFilter - array of endpoint regexes which are not cached. It is suggested to use values from the example above.
+* cacheFolder - path to the folder where cached values will be stored.
 
 ### Installation
 
 Clone the repository:
 ```
-git clone https://github.com/defineEditor/claRelay.git
+git clone https://github.com/defineEditor/claMirror.git
 ```
 Navigate to the downloaded folder and install all required dependencies:
 ```
@@ -62,7 +62,7 @@ your.domain.com:4600/api/mdr/products
 
 You can use packages like [pm2](https://www.npmjs.com/package/pm2), which will help to run the process as a daemon. In this case instead of using *yarn start*, you can start it as:
 ```
-pm2 start api.js
+pm2 start src/app.js
 ```
 
 ### Additions
