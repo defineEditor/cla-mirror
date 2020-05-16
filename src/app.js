@@ -6,7 +6,7 @@ const { CdiscLibrary } = require('cla-wrapper');
 const ClaCache = require('./claCache.js');
 const wrapperRequest = require('./wrapperRequest.js');
 
-var configData = fs.readFileSync(path.join(os.homedir(), '.clarelay'), 'utf8');
+var configData = fs.readFileSync(path.join(os.homedir(), '.clamirror'), 'utf8');
 var config = JSON.parse(configData);
 
 var app = express();
@@ -78,5 +78,5 @@ app.use('/', async (req, res) => {
 
 var port = config.port || 4600;
 app.listen(port, function () {
-    console.log(`CDISC Library API Relay is listening on port ${port}`);
+    console.log(`CDISC Library API Mirror is listening on port ${port}`);
 });

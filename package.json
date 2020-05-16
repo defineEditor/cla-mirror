@@ -1,11 +1,11 @@
 {
-    "name": "cla-relay",
+    "name": "cla-mirror",
     "scripts": {
         "start": "node src/app.js"
     },
-    "version": "0.2.2",
+    "version": "0.2.3",
     "description": "Relay for CDISC Library API ",
-    "repository": "https://github.com/defineEditor/cla-relay",
+    "repository": "https://github.com/defineEditor/cla-mirror",
     "main": "src/app.js",
     "author": "Dmitry Kolosov",
     "contributors": [
