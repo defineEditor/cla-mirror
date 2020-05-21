@@ -27,7 +27,8 @@
     ],
     "license": "MIT",
     "dependencies": {
-        "cla-wrapper": "^0.2.3",
+        "cla-wrapper": "^0.2.5",
+        "compression": "^1.7.4",
         "express": "^4.17.1",
         "jszip": "^3.2.2",
         "query-string": "^6.8.3"

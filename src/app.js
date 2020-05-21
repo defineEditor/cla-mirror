@@ -2,6 +2,7 @@ const express = require('express');
 const fs = require('fs');
 const os = require('os');
 const path = require('path');
+const compression = require('compression');
 const { CdiscLibrary } = require('cla-wrapper');
 const ClaCache = require('./claCache.js');
 const wrapperRequest = require('./wrapperRequest.js');
@@ -29,6 +30,19 @@ const cl = new CdiscLibrary({
     password: config.auth.password,
     cache: cacheEnabled ? { match: (request) => (claCache.claMatch(request)), put: claCache.claPut } : undefined,
 });
+
+// Adding compression
+app.use(compression({ filter: (req, res) => {
+    if (typeof req.headers['accept-encoding'] === 'string') {
+        if (req.headers['accept-encoding'].split(',').map(item => item.trim()).includes('gzip')) {
+            return compression.filter(req, res);
+        } else {
+            return false;
+        }
+    } else {
+        return false;
+    }
+}}));
 
 app.use('/', async (req, res) => {
     try {
@@ -62,7 +76,7 @@ app.use('/', async (req, res) => {
                 res.setHeader('Content-Disposition', 'attachment; filename=' + fileName);
                 res.setHeader('Content-Type', response.headers['content-type']);
                 res.setHeader('Transfer-Encoding', response.headers['transfer-encoding']);
-                res.send(Buffer.from(response.body, 'latin1'));
+                res.send(Buffer.from(response.body, 'binary'));
             } else {
                 res.setHeader('Content-Type', response.headers['content-type']);
                 res.send(response.body);
