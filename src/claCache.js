@@ -1,6 +1,5 @@
 const fs = require('fs');
 const Jszip = require('jszip');
-const crypto = require('crypto');
 const path = require('path');
 const { promisify } = require('util');
 
@@ -45,7 +44,7 @@ class ClaCache {
         this.cachedIds = files.map(file => file.replace(/.gz$/, ''));
     }
 
-    async getRequestId (request) {
+    getRequestId (request) {
         let shortenedUrl = request.url
             .replace(/^.*?api\//, '')
             .replace('/root/', '/r/')
@@ -71,13 +70,18 @@ class ClaCache {
             .replace(/.*?\/mdr\//, '')
             .replace(/\//g, '.')
         ;
-        let requestOptions = JSON.stringify({ ...request.headers });
-        let hashHex = crypto.createHash('sha1').update(requestOptions).digest('hex');
-        if (request && request.headers && request.headers.Accept === 'application/json') {
-            // These are standard request options, no need to add a hash code
-            return shortenedUrl;
+        if (request && request.headers) {
+            if (request.headers.Accept === 'application/json') {
+                return shortenedUrl;
+            } if (request.headers.Accept === 'application/text/csv') {
+                return shortenedUrl + '.csv';
+            } if (request.headers.Accept === 'application/vnd.ms-excel') {
+                return shortenedUrl + '.excel';
+            } else {
+                return;
+            }
         } else {
-            return shortenedUrl + hashHex;
+            return;
         }
     }
 
@@ -104,7 +108,12 @@ class ClaCache {
             return;
         }
         // Get an id
-        let id = await this.getRequestId(request);
+        let id = this.getRequestId(request);
+
+        // Do not cache non-standard Accept header
+        if (id === undefined) {
+            return;
+        }
 
         // Search for the response in cache
         if (this.cachedIds.includes(id)) {
