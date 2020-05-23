@@ -1,0 +1,17 @@
+{
+    "auth": {
+        "username": "",
+        "password": ""
+    },
+    "port": 4600,
+    "cache": {
+        "enabled": true,
+        "includeFilter": [],
+        "excludeFilter": ["health", "mdr/lastupdated", "mdr/products", ".*/root/.*", "mdr/search/.*"],
+        "cacheFolder": "/path/to/cache/folder"
+    },
+    "cors": {
+        "enabled": false,
+        "origins": ["*"]
+    }
+}

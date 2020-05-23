@@ -1,5 +1,7 @@
 node_modules
+test
 *.swp
 *.log
 .tern-project
 .eslintcache
+clamirror.conf
