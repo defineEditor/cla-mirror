@@ -6,8 +6,9 @@ const compression = require('compression');
 const { CdiscLibrary } = require('cla-wrapper');
 const ClaCache = require('./claCache.js');
 const wrapperRequest = require('./wrapperRequest.js');
+const cors = require('cors');
 
-var configData = fs.readFileSync(path.join(os.homedir(), '.clamirror'), 'utf8');
+var configData = fs.readFileSync(path.join(__dirname, '..', 'clamirror.conf'), 'utf8');
 var config = JSON.parse(configData);
 
 var app = express();
@@ -24,16 +25,30 @@ if (cacheEnabled) {
     claCache.init();
 }
 
-// Load CLA Wrapper
-const cl = new CdiscLibrary({
-    username: config.auth.username,
-    password: config.auth.password,
-    cache: cacheEnabled ? { match: (request) => (claCache.claMatch(request)), put: claCache.claPut } : undefined,
-});
+// Setup CORS
+const corsEnabled = config.cors && config.cors.enabled;
+if (corsEnabled) {
+    const origins = config.cors.origins;
+    let corsOptions;
+    if (Array.isArray (origins) && origins.length > 0 && !(origins.length === 1 && origins[0] === '*')) {
+        corsOptions = {
+            origin: function (origin, callback) {
+                if (origins.indexOf(origin) !== -1) {
+                    callback(null, true)
+                } else {
+                    callback(new Error('Not allowed by CORS'))
+                }
+            }
+        }
+    }
+    app.use(cors(corsOptions));
+}
 
 // Adding compression
 app.use(compression({ filter: (req, res) => {
-    if (typeof req.headers['accept-encoding'] === 'string') {
+    if (req.headers['x-no-compression']) {
+        return false;
+    } else if (typeof req.headers['accept-encoding'] === 'string') {
         if (req.headers['accept-encoding'].split(',').map(item => item.trim()).includes('gzip')) {
             return compression.filter(req, res);
         } else {
@@ -43,6 +58,13 @@ app.use(compression({ filter: (req, res) => {
         return false;
     }
 }}));
+
+// Load CLA Wrapper
+const cl = new CdiscLibrary({
+    username: config.auth.username,
+    password: config.auth.password,
+    cache: cacheEnabled ? { match: (request) => (claCache.claMatch(request)), put: claCache.claPut } : undefined,
+});
 
 app.use('/', async (req, res) => {
     try {
@@ -70,6 +92,12 @@ app.use('/', async (req, res) => {
                     returnRaw: true,
                 }
             );
+
+            // If the request failed (undefined - value is taken from cache)
+            if (response.statusCode !== 200 && response.statusCode !== undefined) {
+                res.sendStatus(response.statusCode);
+                return;
+            }
 
             if (response.headers['content-type'] === 'application/vnd.ms-excel') {
                 let fileName = endpoint.replace(/.*\/(.+\/.+)/, '$1').replace(/\W/g, '.') + '.xls';

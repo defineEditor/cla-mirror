@@ -18,7 +18,7 @@ The following software is needed to compile the application:
 * Yarn
 
 ### Configuration
-Create file **.clamirror** in your home folder:
+Create file **clamirror.conf** in the project root folder (see clamirror.conf.example):
 ```
 {
     "auth": {
@@ -29,17 +29,23 @@ Create file **.clamirror** in your home folder:
     "cache": {
         "enabled": false,
         "includeFilter": [],
-        "excludeFilter": ["health", "mdr/lastupdated", "mdr/products", ".*/root/.*"],
+        "excludeFilter": ["health", "mdr/lastupdated", "mdr/products", ".*/root/.*", "mdr/search/.*"],
         "cacheFolder": "/path/to/cache/folder"
+    }
+    "cors": {
+        "enabled": false,
+        "origins": ["*"]
     }
 }
 ```
 
 The mirror support basic caching functionality, to use it, change ***cache.enabled*** value to true.
 * cache.enabled - controls whether cache is used.
-* includeFilter - array of endpoint regexes which are cached. If none specified, all endpoints are cached, except for those specified in excludeFilter.
-* excludeFilter - array of endpoint regexes which are not cached. It is suggested to use values from the example above.
-* cacheFolder - path to the folder where cached values will be stored.
+* cache.includeFilter - array of endpoint regexes which are cached. If none specified, all endpoints are cached, except for those specified in excludeFilter.
+* cache.excludeFilter - array of endpoint regexes which are not cached. It is suggested to use values from the example above.
+* cache.cacheFolder - path to the folder where cached values will be stored.
+* cors.enalbed - controls whether cross-origin resource sharing is used.
+* cors.origins - array of origins which are allowed. Value "*" allows all origins.
 
 ### Installation
 

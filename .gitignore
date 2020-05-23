@@ -4,3 +4,4 @@ test
 *.log
 .tern-project
 .eslintcache
+clamirror.conf
