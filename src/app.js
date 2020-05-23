@@ -30,7 +30,7 @@ const corsEnabled = config.cors && config.cors.enabled;
 if (corsEnabled) {
     const origins = config.cors.origins;
     let corsOptions;
-    if (Array.isArray (origins) && origins.length > 0 && !(origins.length === 1 && origins[0] === '*')) {
+    if (!(Array.isArray (origins) && origins.length === 1 && origins[0] === '*')) {
         corsOptions = {
             origin: function (origin, callback) {
                 if (origins.indexOf(origin) !== -1) {
