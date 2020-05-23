@@ -3,7 +3,7 @@
     "scripts": {
         "start": "node src/app.js"
     },
-    "version": "0.2.3",
+    "version": "0.3.0",
     "description": "Relay for CDISC Library API ",
     "repository": "https://github.com/defineEditor/cla-mirror",
     "main": "src/app.js",
