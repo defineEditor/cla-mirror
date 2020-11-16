@@ -63,6 +63,7 @@ app.use(compression({ filter: (req, res) => {
 const cl = new CdiscLibrary({
     username: config.auth.username,
     password: config.auth.password,
+    apiKey: config.auth.apiKey,
     cache: cacheEnabled ? { match: (request) => (claCache.claMatch(request)), put: claCache.claPut } : undefined,
 });
 

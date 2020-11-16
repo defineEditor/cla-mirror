@@ -3,8 +3,8 @@
     "scripts": {
         "start": "node src/app.js"
     },
-    "version": "0.3.0",
-    "description": "Relay for CDISC Library API ",
+    "version": "0.3.1",
+    "description": "Mirror for CDISC Library API ",
     "repository": "https://github.com/defineEditor/cla-mirror",
     "main": "src/app.js",
     "author": "Dmitry Kolosov",

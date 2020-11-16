@@ -1,7 +1,6 @@
 {
     "auth": {
-        "username": "",
-        "password": ""
+        "apiKey": ""
     },
     "port": 4600,
     "cache": {

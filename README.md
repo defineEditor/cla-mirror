@@ -22,8 +22,7 @@ Create file **clamirror.conf** in the project root folder (see clamirror.conf.ex
 ```
 {
     "auth": {
-        "username": "CDISC Library API username",
-        "password": "CDISC Library API password"
+        "apiKey": "CDISC Library API primary key"
     },
     "port": 4600,
     "cache": {
