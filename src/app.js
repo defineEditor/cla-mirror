@@ -1,6 +1,8 @@
 const express = require('express');
 const fs = require('fs');
 const os = require('os');
+const http = require('http');
+const https = require('https');
 const path = require('path');
 const compression = require('compression');
 const { CdiscLibrary } = require('cla-wrapper');
@@ -12,6 +14,8 @@ var configData = fs.readFileSync(path.join(__dirname, '..', 'clamirror.conf'), '
 var config = JSON.parse(configData);
 
 var app = express();
+
+var debug = config.debug || false;
 
 // Initialize a cache object
 const cacheEnabled = config.cache && config.cache.enabled;
@@ -69,6 +73,9 @@ const cl = new CdiscLibrary({
 
 app.use('/', async (req, res) => {
     try {
+        if (debug) {
+            console.log('URL:' + req.url);
+        }
         if (req.url.startsWith('/api/')) {
             let endpoint = req.url.replace(/^\/api/, '');
             let headers = {};
@@ -86,6 +93,10 @@ app.use('/', async (req, res) => {
                     endpoint = endpoint.replace(/&format=json/i, '');
                 }
             }
+            // If config.apiKey is blank, then use the apiKey from the request
+            if (!config.auth.apiKey && req.headers['api-key']) {
+                headers['api-key'] = req.headers['api-key'];
+            }
             let response = await cl.coreObject.apiRequest(
                 endpoint,
                 {
@@ -96,6 +107,9 @@ app.use('/', async (req, res) => {
 
             // If the request failed (undefined - value is taken from cache)
             if (response.statusCode !== 200 && response.statusCode !== undefined) {
+                if (debug) {
+                    console.log('Request failed: ' + response.statusCode);
+                }
                 res.sendStatus(response.statusCode);
                 return;
             }
@@ -120,6 +134,17 @@ app.use('/', async (req, res) => {
 });
 
 var port = config.port || 4600;
-app.listen(port, function () {
-    console.log(`CDISC Library API Mirror is listening on port ${port}`);
-});
+
+if (config.https !== undefined && config.https.enabled === true) {
+    var key = fs.readFileSync(config.https.privateKeyPath, 'utf8');
+    var cert = fs.readFileSync(config.https.certificatePath, 'utf8');
+    var httpsServer = https.createServer({key, cert}, app);
+    httpsServer.listen(port, () => {
+        console.log(`CDISC Library API Mirror is listening on port ${port} using HTTPS protocol`);
+    } );
+} else {
+    app.listen(port, () => {
+        console.log(`CDISC Library API Mirror is listening on port ${port} using HTTP protocol`);
+    });
+}
+

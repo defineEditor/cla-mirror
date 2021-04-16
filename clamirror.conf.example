@@ -3,6 +3,7 @@
         "apiKey": ""
     },
     "port": 4600,
+    "debug": false,
     "cache": {
         "enabled": true,
         "includeFilter": [],
@@ -12,5 +13,10 @@
     "cors": {
         "enabled": false,
         "origins": ["*"]
+    },
+    "https": {
+        "enabled": false,
+        "privateKeyPath": "/path/to/key",
+        "certificatePath": "/path/to/cert",
     }
 }

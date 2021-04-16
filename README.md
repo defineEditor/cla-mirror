@@ -25,6 +25,7 @@ Create file **clamirror.conf** in the project root folder (see clamirror.conf.ex
         "apiKey": "CDISC Library API primary key"
     },
     "port": 4600,
+    "debug": false,
     "cache": {
         "enabled": false,
         "includeFilter": [],
@@ -34,17 +35,28 @@ Create file **clamirror.conf** in the project root folder (see clamirror.conf.ex
     "cors": {
         "enabled": false,
         "origins": ["*"]
+    },
+    "https": {
+        "enabled": false,
+        "privateKeyPath": "/path/to/key",
+        "certificatePath": "/path/to/cert",
     }
 }
 ```
 
 The mirror support basic caching functionality, to use it, change ***cache.enabled*** value to true.
+* debug - controls whether additional information is printed to STDOUT. Must be boolean (true/false).
 * cache.enabled - controls whether cache is used.
 * cache.includeFilter - array of endpoint regexes which are cached. If none specified, all endpoints are cached, except for those specified in excludeFilter.
 * cache.excludeFilter - array of endpoint regexes which are not cached. It is suggested to use values from the example above.
 * cache.cacheFolder - path to the folder where cached values will be stored.
 * cors.enalbed - controls whether cross-origin resource sharing is used.
 * cors.origins - array of origins which are allowed. Value "*" allows all origins.
+* https.enalbed - controls whether HTTPS should be used instead of HTTP.
+* https.privateKeyPath - path to a private key, must be provided when HTTPS is ebabled.
+* https.certificatePath - path to a certificated, must be provided when HTTPS is ebabled.
+
+If apiKey property is removed, 'api-key' header property from the response will be used.
 
 ### Installation
 
