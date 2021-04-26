@@ -18,5 +18,16 @@
         "enabled": false,
         "privateKeyPath": "/path/to/key",
         "certificatePath": "/path/to/cert",
+    },
+    "ct": {
+        "useNciSiteForCt": false,
+        "nciSiteUrl": "https://evs.nci.nih.gov/ftp1/CDISC",
+        "enableNciProxy": false
+    },
+    "rateLimit": {
+        "enabled": false,
+        "windowMs": 900000,
+        "max": 100
     }
+
 }

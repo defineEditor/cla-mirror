@@ -40,6 +40,11 @@ Create file **clamirror.conf** in the project root folder (see clamirror.conf.ex
         "enabled": false,
         "privateKeyPath": "/path/to/key",
         "certificatePath": "/path/to/cert",
+    },
+    "ct": {
+        "useNciSiteForCt": false,
+        "nciSiteUrl": "https://evs.nci.nih.gov/ftp1/CDISC",
+        "enableNciProxy": false
     }
 }
 ```
@@ -52,9 +57,15 @@ The mirror support basic caching functionality, to use it, change ***cache.enabl
 * cache.cacheFolder - path to the folder where cached values will be stored.
 * cors.enalbed - controls whether cross-origin resource sharing is used.
 * cors.origins - array of origins which are allowed. Value "*" allows all origins.
-* https.enalbed - controls whether HTTPS should be used instead of HTTP.
+* https.enabled - controls whether HTTPS should be used instead of HTTP.
 * https.privateKeyPath - path to a private key, must be provided when HTTPS is ebabled.
 * https.certificatePath - path to a certificated, must be provided when HTTPS is ebabled.
+* ct.useNciSiteForCt - When enabled, terminology will be loaded from NCI site, rather than CDISC Library.
+* ct.nciSiteUrl - Path to NCI site. Can be left blank for default site. Note that nci.nig.gov does not support CORS.
+* ct.enableNciProxy - When enabled requests to /nciSite/* will be redirected to nciSiteUrl.
+* rateLimit.enalbed - Controls rate limit for a request from a single IP. See [express-rate-limit](https://www.npmjs.com/package/express-rate-limit) for details.
+* rateLimit.windowMs - Window length in miliseconds.
+* rateLimit.max - Max number of requests from a single IP.
 
 If apiKey property is removed, 'api-key' header property from the response will be used.
 
