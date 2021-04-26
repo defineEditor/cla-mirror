@@ -9,9 +9,16 @@ const { CdiscLibrary } = require('cla-wrapper');
 const ClaCache = require('./claCache.js');
 const wrapperRequest = require('./wrapperRequest.js');
 const cors = require('cors');
+const rateLimit = require("express-rate-limit");
 
 var configData = fs.readFileSync(path.join(__dirname, '..', 'clamirror.conf'), 'utf8');
 var config = JSON.parse(configData);
+
+if (config.ct === undefined) {
+    config.ct = {
+        useNciSiteForCt: false,
+    };
+}
 
 var app = express();
 
@@ -27,6 +34,16 @@ if (cacheEnabled) {
         includeFilter: config.cache.includeFilter
     });
     claCache.init();
+}
+
+// Rate limit
+const rateLimitEnabled = config.rateLimit && config.rateLimit.enabled;
+if (rateLimitEnabled) {
+    let rateLimitConfig = config.rateLimit;
+    delete rateLimitConfig.enabled;
+    rateLimitConfig = { message: 'You have reached the number of allowed requests. Please wait.', ...rateLimitConfig };
+    const apiLimiter = rateLimit(rateLimitConfig);
+    app.use(apiLimiter);
 }
 
 // Setup CORS
@@ -65,9 +82,9 @@ app.use(compression({ filter: (req, res) => {
 
 // Load CLA Wrapper
 const cl = new CdiscLibrary({
-    username: config.auth.username,
-    password: config.auth.password,
     apiKey: config.auth.apiKey,
+    useNciSiteForCt: config.ct.useNciSiteForCt,
+    nciSiteUrl: config.ct.nciSiteUrl,
     cache: cacheEnabled ? { match: (request) => (claCache.claMatch(request)), put: claCache.claPut } : undefined,
 });
 
@@ -126,6 +143,15 @@ app.use('/', async (req, res) => {
             }
         } else if (req.url.startsWith('/?')) {
             let response = await wrapperRequest(req.url.replace(/^\//, ''), cl);
+            res.send(response.body);
+        } else if (req.url.startsWith('/nciSite/')) {
+            let response = await cl.coreObject.apiRequest(
+                req.url,
+                {
+                    headers: { Accept: 'text/xml' },
+                    returnRaw: true,
+                }
+            );
             res.send(response.body);
         }
     } catch (error) {

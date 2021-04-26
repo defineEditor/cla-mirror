@@ -47,6 +47,7 @@ class ClaCache {
     getRequestId (request) {
         let shortenedUrl = request.url
             .replace(/^.*?api\//, '')
+            .replace(/^.*?ftp1\/CDISC\//, '')
             .replace('/root/', '/r/')
             .replace('/cdash/', '/cd/')
             .replace('/cdashig/', '/cdi/')
@@ -77,6 +78,10 @@ class ClaCache {
                 return shortenedUrl + '.csv';
             } if (request.headers.Accept === 'application/vnd.ms-excel') {
                 return shortenedUrl + '.excel';
+            } if (request.headers.Accept === 'text/html') {
+                return shortenedUrl + '.html';
+            } if (request.headers.Accept === 'text/xml') {
+                return shortenedUrl + '.xml';
             } else {
                 return;
             }
