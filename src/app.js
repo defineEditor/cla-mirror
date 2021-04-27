@@ -17,6 +17,7 @@ var config = JSON.parse(configData);
 if (config.ct === undefined) {
     config.ct = {
         useNciSiteForCt: false,
+        enableNciProxy: false,
     };
 }
 
@@ -144,11 +145,15 @@ app.use('/', async (req, res) => {
         } else if (req.url.startsWith('/?')) {
             let response = await wrapperRequest(req.url.replace(/^\//, ''), cl);
             res.send(response.body);
-        } else if (req.url.startsWith('/nciSite/')) {
+        } else if (req.url.startsWith('/nciSite/') && config.ct.enableNciProxy) {
+            let acceptType = 'text/html';
+            if (req.url.endsWith('.xml')) {
+                acceptType = 'text/xml';
+            }
             let response = await cl.coreObject.apiRequest(
                 req.url,
                 {
-                    headers: { Accept: 'text/xml' },
+                    headers: { Accept: acceptType},
                     returnRaw: true,
                 }
             );
