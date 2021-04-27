@@ -99,9 +99,9 @@ caseless@~0.12.0:
   integrity sha1-G2gcIf+EAzyCZUMJBolCDRhxUdw=
 
 cla-wrapper@^0.3.0:
-  version "0.3.2"
-  resolved "https://registry.yarnpkg.com/cla-wrapper/-/cla-wrapper-0.3.2.tgz#b2a0a7060a68e9a83c64fadfe6a2963e4e2e3b44"
-  integrity sha512-/+zpGnUZ14+5Fnm5sq9Ru+a+AIyp+UFMJ0mNOEMkJZurFsvxoSeLWgYHhARMPrRIv/uy/RsxORHEXUlNPAhPaw==
+  version "0.3.5"
+  resolved "https://registry.yarnpkg.com/cla-wrapper/-/cla-wrapper-0.3.5.tgz#310b6be37657f1ca3f8515b4f6c950aa0f49f81f"
+  integrity sha512-cHrDmqtYoh+sKn6PppafB8LJkrzihaNhrvWaMoeRKgvfvCXaypab3qn8oatjCiUrOsYY4F4uTXIwTRqqqf/WOw==
   dependencies:
     fast-xml-parser "^3.19.0"
     json2csv "^5.0.0"
