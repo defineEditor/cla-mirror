@@ -32,7 +32,7 @@
         "cors": "^2.8.5",
         "express": "^4.17.1",
         "express-rate-limit": "^5.2.6",
-        "jszip": "^3.2.2",
+        "jszip": "^3.8.0",
         "query-string": "^6.8.3"
     }
 }
