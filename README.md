@@ -77,11 +77,11 @@ git clone https://github.com/defineEditor/cla-mirror.git
 ```
 Navigate to the downloaded folder and install all required dependencies:
 ```
-yarn install
+npm install
 ```
 Run the script:
 ```
-yarn start
+npm run start
 ```
 Now you should be able to access the API via the port specified in the configuration file, e.g.:
 ```
