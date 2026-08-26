@@ -70,6 +70,7 @@ class ClaCache {
             .replace('/scenarios/', '/s/')
             .replace(/.*?\/mdr\//, '')
             .replace(/\//g, '.')
+            .replace(/\s/g, '_')
         ;
         if (request && request.headers) {
             if (request.headers.Accept === 'application/json') {
