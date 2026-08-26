@@ -15,7 +15,7 @@ This script allows to use CDISC Library API by keeping the authentication inform
 The following software is needed to compile the application:
 * Git
 * Node.js
-* Yarn
+* npm
 
 ### Configuration
 Create file **clamirror.conf** in the project root folder (see clamirror.conf.example):
@@ -77,18 +77,18 @@ git clone https://github.com/defineEditor/cla-mirror.git
 ```
 Navigate to the downloaded folder and install all required dependencies:
 ```
-yarn install
+npm install
 ```
 Run the script:
 ```
-yarn start
+npm run start
 ```
 Now you should be able to access the API via the port specified in the configuration file, e.g.:
 ```
 your.domain.com:4600/api/mdr/products
 ```
 
-You can use packages like [pm2](https://www.npmjs.com/package/pm2), which will help to run the process as a daemon. In this case instead of using *yarn start*, you can start it as:
+You can use packages like [pm2](https://www.npmjs.com/package/pm2), which will help to run the process as a daemon. In this case instead of using *npm run start*, you can start it as:
 ```
 pm2 start src/app.js
 ```
